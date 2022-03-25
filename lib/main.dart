@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flowder/flowder.dart';
 import 'package:filedownloader_demo/file_models/file_model.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flowder Sample'),
+      home: const MyHomePage(title: 'File Download Demo'),
     );
   }
 }
@@ -110,7 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
               options = DownloaderUtils(
                 progressCallback: (current, total) {
                   final progress = (current / total) * 100;
-                  print('Downloading: $progress');
+                  if (kDebugMode) {
+                    print('Downloading: $progress');
+                  }
 
                   setState(() {
                     fileList[index].progress = (current / total);
